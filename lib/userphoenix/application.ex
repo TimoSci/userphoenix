@@ -12,8 +12,7 @@ defmodule Userphoenix.Application do
       Userphoenix.Repo,
       {DNSCluster, query: Application.get_env(:userphoenix, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Userphoenix.PubSub},
-      # Start a worker by calling: Userphoenix.Worker.start_link(arg)
-      # {Userphoenix.Worker, arg},
+      Userphoenix.RateLimiter,
       # Start to serve requests, typically the last entry
       UserphoenixWeb.Endpoint
     ]
