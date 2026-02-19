@@ -34,6 +34,7 @@ defmodule UserphoenixWeb.Router do
     pipe_through [:browser, :rate_limited]
 
     get "/u/:token", TokenController, :verify
+    get "/u/:token/dashboard", DashboardController, :show
   end
 
   scope "/", UserphoenixWeb do

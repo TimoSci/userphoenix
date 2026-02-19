@@ -1,16 +1,16 @@
-defmodule UserphoenixWeb.TokenController do
+defmodule UserphoenixWeb.DashboardController do
   use UserphoenixWeb, :controller
 
   alias Userphoenix.Users
   alias Userphoenix.RateLimiter
 
-  def verify(conn, %{"token" => raw_token}) do
+  def show(conn, %{"token" => raw_token}) do
     case Users.get_user_by_token(raw_token) do
       {:ok, user} ->
         conn
         |> put_session(:user_id, user.id)
         |> configure_session(renew: true)
-        |> redirect(to: ~p"/u/#{raw_token}/dashboard")
+        |> render(:show, user: user, token: raw_token)
 
       {:error, :not_found} ->
         ip = conn.remote_ip |> :inet.ntoa() |> to_string()
