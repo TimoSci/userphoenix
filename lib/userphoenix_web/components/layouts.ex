@@ -38,8 +38,11 @@ defmodule UserphoenixWeb.Layouts do
   def app(assigns) do
     ~H"""
     <header class="navbar px-4 sm:px-6 lg:px-8">
-      <div class="flex-1">
+      <div class="flex-1 flex items-center gap-4">
         <a href="/" class="text-lg font-bold">Userphoenix</a>
+        <span :if={@current_user} class="text-sm opacity-70">
+          Signed in as <span class="font-semibold">{@current_user.name}</span>
+        </span>
       </div>
       <div class="flex-none">
         <ul class="flex flex-column px-1 space-x-4 items-center">
