@@ -27,6 +27,7 @@ defmodule UserphoenixWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    delete "/logout", PageController, :logout
     live "/access", AccessLive
   end
 

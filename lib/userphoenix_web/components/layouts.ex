@@ -31,6 +31,8 @@ defmodule UserphoenixWeb.Layouts do
     default: nil,
     doc: "the current [scope](https://hexdocs.pm/phoenix/scopes.html)"
 
+  attr :current_user, :map, default: nil, doc: "the currently authenticated user, if any"
+
   slot :inner_block, required: true
 
   def app(assigns) do
@@ -44,7 +46,14 @@ defmodule UserphoenixWeb.Layouts do
           <li>
             <.theme_toggle />
           </li>
-          <li>
+          <li :if={@current_user}>
+            <.form for={%{}} action={~p"/logout"} method="delete">
+              <.button type="submit">
+                <.icon name="hero-arrow-right-start-on-rectangle-mini" /> Logout
+              </.button>
+            </.form>
+          </li>
+          <li :if={!@current_user}>
             <.form for={%{}} action={~p"/"} method="post">
               <.button type="submit" variant="primary">
                 <.icon name="hero-user-plus-mini" /> Create Anonymous Account
