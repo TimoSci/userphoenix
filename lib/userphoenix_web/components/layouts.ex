@@ -40,6 +40,9 @@ defmodule UserphoenixWeb.Layouts do
     <header class="navbar px-4 sm:px-6 lg:px-8">
       <div class="flex-1 flex items-center gap-4">
         <a href="/" class="text-lg font-bold">Userphoenix</a>
+        <span :if={Phoenix.Flash.get(@flash, :mnemonic)} class="text-base font-bold text-primary">
+          Account Created!
+        </span>
         <span :if={@current_user} class="text-sm opacity-70">
           Signed in as <span class="font-semibold">{@current_user.name}</span>
         </span>
