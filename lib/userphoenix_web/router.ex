@@ -33,6 +33,7 @@ defmodule UserphoenixWeb.Router do
   scope "/", UserphoenixWeb do
     pipe_through [:browser, :rate_limited]
 
+    post "/", PageController, :create
     get "/u/:token", TokenController, :verify
     get "/u/:token/dashboard", DashboardController, :show
   end
