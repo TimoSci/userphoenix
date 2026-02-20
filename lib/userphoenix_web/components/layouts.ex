@@ -65,6 +65,11 @@ defmodule UserphoenixWeb.Layouts do
             </.form>
           </li>
           <li :if={!@current_user}>
+            <.button navigate={~p"/access/token"}>
+              <.icon name="hero-key-mini" /> Login with token
+            </.button>
+          </li>
+          <li :if={!@current_user}>
             <.form for={%{}} action={~p"/"} method="post">
               <.button type="submit" variant="primary">
                 <.icon name="hero-user-plus-mini" /> Create Anonymous Account

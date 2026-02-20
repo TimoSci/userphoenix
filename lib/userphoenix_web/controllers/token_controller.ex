@@ -25,7 +25,7 @@ defmodule UserphoenixWeb.TokenController do
 
         conn
         |> put_flash(:error, "Invalid access token.")
-        |> redirect(to: ~p"/access")
+        |> redirect(to: ~p"/access/token")
     end
   end
 end

@@ -17,7 +17,7 @@ defmodule UserphoenixWeb.SettingsControllerTest do
 
     test "redirects to /access when not authenticated", %{conn: conn, user: user} do
       conn = get(conn, ~p"/user/#{user}/settings")
-      assert redirected_to(conn) == "/access"
+      assert redirected_to(conn) == "/access/token"
     end
   end
 

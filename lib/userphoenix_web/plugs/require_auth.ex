@@ -1,6 +1,6 @@
 defmodule UserphoenixWeb.Plugs.RequireAuth do
   @moduledoc """
-  Plug that redirects unauthenticated users to /access.
+  Plug that redirects unauthenticated users to /access/token.
   """
 
   import Plug.Conn
@@ -13,7 +13,7 @@ defmodule UserphoenixWeb.Plugs.RequireAuth do
       conn
     else
       conn
-      |> redirect(to: "/access")
+      |> redirect(to: "/access/token")
       |> halt()
     end
   end

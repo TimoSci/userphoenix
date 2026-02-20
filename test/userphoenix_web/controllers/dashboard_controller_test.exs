@@ -22,6 +22,6 @@ defmodule UserphoenixWeb.DashboardControllerTest do
     user: user
   } do
     conn = get(conn, ~p"/user/#{user}/dashboard")
-    assert redirected_to(conn) == "/access"
+    assert redirected_to(conn) == "/access/token"
   end
 end

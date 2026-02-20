@@ -28,7 +28,8 @@ defmodule UserphoenixWeb.Router do
 
     get "/", PageController, :home
     delete "/logout", PageController, :logout
-    live "/access", AccessLive
+    live "/access/token", AccessTokenLive
+    live "/access/mnemonic", AccessLive
   end
 
   scope "/", UserphoenixWeb do

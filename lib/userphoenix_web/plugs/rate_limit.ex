@@ -16,7 +16,7 @@ defmodule UserphoenixWeb.Plugs.RateLimit do
     if RateLimiter.blocked?(ip) do
       conn
       |> put_flash(:error, "Too many failed attempts. Please try again later.")
-      |> redirect(to: "/access")
+      |> redirect(to: "/access/token")
       |> halt()
     else
       conn

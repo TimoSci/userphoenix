@@ -27,7 +27,7 @@ defmodule UserphoenixWeb.Plugs.Auth do
     if socket.assigns.current_user do
       {:cont, socket}
     else
-      {:halt, Phoenix.LiveView.redirect(socket, to: "/access")}
+      {:halt, Phoenix.LiveView.redirect(socket, to: "/access/token")}
     end
   end
 

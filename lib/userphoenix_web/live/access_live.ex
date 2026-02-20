@@ -22,8 +22,11 @@ defmodule UserphoenixWeb.AccessLive do
         <p :if={@word_count > 0} class="text-sm mt-1 opacity-70">
           {word_count_text(@word_count)}
         </p>
-        <footer>
+        <footer class="flex items-center justify-between">
           <.button phx-disable-with="Verifying..." variant="primary">Access Account</.button>
+          <.link navigate={~p"/access/token"} class="text-sm text-primary hover:underline">
+            Login with token instead
+          </.link>
         </footer>
       </.form>
     </Layouts.app>

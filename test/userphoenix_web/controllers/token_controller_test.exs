@@ -29,7 +29,7 @@ defmodule UserphoenixWeb.TokenControllerTest do
 
     test "redirects to /access with invalid token", %{conn: conn} do
       conn = get(conn, ~p"/u/invalidtoken1234567890abcdef00")
-      assert redirected_to(conn) == ~p"/access"
+      assert redirected_to(conn) == ~p"/access/token"
       assert Phoenix.Flash.get(conn.assigns.flash, :error) =~ "Invalid access token"
     end
 
