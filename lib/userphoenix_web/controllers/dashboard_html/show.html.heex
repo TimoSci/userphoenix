@@ -24,15 +24,8 @@
     </div>
 
     <div class="rounded-box border border-base-300 p-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-sm font-semibold opacity-70">Signed in as</h2>
-          <p class="text-lg font-bold">{@user.name}</p>
-        </div>
-        <.button navigate={~p"/users/#{@user}/edit?return_to=show"}>
-          <.icon name="hero-cog-6-tooth-mini" /> Settings
-        </.button>
-      </div>
+      <h2 class="text-sm font-semibold opacity-70">Signed in as</h2>
+      <p class="text-lg font-bold">{@user.name}</p>
     </div>
 
     <._dashboard />

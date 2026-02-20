@@ -47,6 +47,11 @@ defmodule UserphoenixWeb.Layouts do
             <.theme_toggle />
           </li>
           <li :if={@current_user}>
+            <.button navigate={~p"/users/#{@current_user}/edit"}>
+              <.icon name="hero-cog-6-tooth-mini" /> Settings
+            </.button>
+          </li>
+          <li :if={@current_user}>
             <.form for={%{}} action={~p"/logout"} method="delete">
               <.button type="submit">
                 <.icon name="hero-arrow-right-start-on-rectangle-mini" /> Logout
