@@ -2,6 +2,7 @@ defmodule UserphoenixWeb.PageController do
   use UserphoenixWeb, :controller
 
   alias Userphoenix.Users
+  alias Userphoenix.Users.Mnemonic
 
   def home(conn, _params) do
     render(conn, :home)
@@ -16,7 +17,10 @@ defmodule UserphoenixWeb.PageController do
   def create(conn, _params) do
     case Users.create_user_with_token(%{name: "Anonymous"}) do
       {:ok, user} ->
+        mnemonic = Mnemonic.encode(user.raw_token)
+
         conn
+        |> put_flash(:mnemonic, mnemonic)
         |> redirect(to: ~p"/u/#{user.raw_token}")
 
       {:error, _changeset} ->
