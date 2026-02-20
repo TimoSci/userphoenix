@@ -7,11 +7,17 @@ defmodule UserphoenixWeb.TokenController do
   def verify(conn, %{"token" => raw_token}) do
     case Users.get_user_by_token(raw_token) do
       {:ok, user} ->
-        conn
-        |> put_session(:user_id, user.id)
-        |> put_session(:token, raw_token)
-        |> configure_session(renew: true)
-        |> redirect(to: ~p"/user/#{user}/dashboard")
+        conn =
+          conn
+          |> put_session(:user_id, user.id)
+          |> put_session(:token, raw_token)
+          |> configure_session(renew: true)
+
+        if Phoenix.Flash.get(conn.assigns.flash, :mnemonic) do
+          render(conn, :welcome, user: user, token: raw_token)
+        else
+          redirect(conn, to: ~p"/user/#{user}/dashboard")
+        end
 
       {:error, :not_found} ->
         ip = conn.remote_ip |> :inet.ntoa() |> to_string()

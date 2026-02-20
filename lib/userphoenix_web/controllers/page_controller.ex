@@ -21,7 +21,6 @@ defmodule UserphoenixWeb.PageController do
 
         conn
         |> put_flash(:mnemonic, mnemonic)
-        |> put_flash(:token, user.raw_token)
         |> redirect(to: ~p"/u/#{user.raw_token}")
 
       {:error, _changeset} ->

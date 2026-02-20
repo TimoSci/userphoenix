@@ -1,51 +1,5 @@
 <Layouts.app flash={@flash} current_user={@user}>
   <div class="space-y-8">
-    <div
-      :if={Phoenix.Flash.get(@flash, :mnemonic)}
-      class="rounded-box border border-warning bg-warning/10 p-6"
-    >
-      <div class="flex items-start justify-between gap-4">
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-2">
-            <.icon name="hero-exclamation-triangle" class="size-5 text-warning" />
-            <h2 class="font-bold text-warning">Save Your Recovery Phrase</h2>
-          </div>
-          <p class="text-sm mb-3">
-            Save this mnemonic and keep it in a safe place &mdash; this is your "password" to the account.
-          </p>
-          <p class="font-mono text-sm bg-base-300/50 rounded-box p-3 select-all">
-            {Phoenix.Flash.get(@flash, :mnemonic)}
-          </p>
-        </div>
-        <a href={~p"/user/#{@user}/dashboard"} class="btn btn-sm btn-ghost">
-          <.icon name="hero-x-mark" class="size-5" />
-        </a>
-      </div>
-    </div>
-
-    <div
-      :if={Phoenix.Flash.get(@flash, :mnemonic)}
-      class="rounded-box border border-accent bg-accent/10 p-6"
-    >
-      <div class="flex items-start justify-between gap-4">
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-2">
-            <.icon name="hero-light-bulb" class="size-5 text-accent" />
-            <h2 class="font-bold text-accent">Tip:</h2>
-          </div>
-          <p class="text-sm mb-3">
-            You can always access your account with this secret web link. Create a bookmark for convenience!
-          </p>
-          <p class="font-mono text-sm bg-base-300/50 rounded-box p-3 select-all">
-            {UserphoenixWeb.Endpoint.url()}/u/{Phoenix.Flash.get(@flash, :token)}
-          </p>
-        </div>
-        <a href={~p"/user/#{@user}/dashboard"} class="btn btn-sm btn-ghost">
-          <.icon name="hero-x-mark" class="size-5" />
-        </a>
-      </div>
-    </div>
-
     <._dashboard />
   </div>
 </Layouts.app>
