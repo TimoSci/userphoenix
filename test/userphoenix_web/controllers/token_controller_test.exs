@@ -5,10 +5,10 @@ defmodule UserphoenixWeb.TokenControllerTest do
 
   describe "GET /u/:token" do
     test "redirects to dashboard with valid token", %{conn: conn} do
-      {_user, raw_token} = user_fixture_with_token()
+      {user, raw_token} = user_fixture_with_token()
 
       conn = get(conn, ~p"/u/#{raw_token}")
-      assert redirected_to(conn) == ~p"/u/#{raw_token}/dashboard"
+      assert redirected_to(conn) == ~p"/user/#{user}/dashboard"
     end
 
     test "redirects to /access with invalid token", %{conn: conn} do
@@ -18,10 +18,10 @@ defmodule UserphoenixWeb.TokenControllerTest do
     end
 
     test "sets session on valid token", %{conn: conn} do
-      {_user, raw_token} = user_fixture_with_token()
+      {user, raw_token} = user_fixture_with_token()
 
       conn = get(conn, ~p"/u/#{raw_token}")
-      conn = get(recycle(conn), ~p"/u/#{raw_token}/dashboard")
+      conn = get(recycle(conn), ~p"/user/#{user}/dashboard")
       assert conn.status == 200
     end
   end

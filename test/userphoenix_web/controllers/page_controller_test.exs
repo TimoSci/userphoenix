@@ -13,11 +13,11 @@ defmodule UserphoenixWeb.PageControllerTest do
     assert "/u/" <> _token = redirected_to(conn)
   end
 
-  test "POST / sets up a valid token URL", %{conn: conn} do
+  test "POST / sets up a valid token URL that redirects to user dashboard", %{conn: conn} do
     conn = post(conn, ~p"/")
     redirect_path = redirected_to(conn)
 
     conn = get(recycle(conn), redirect_path)
-    assert "/u/" <> _rest = redirected_to(conn)
+    assert "/user/" <> _rest = redirected_to(conn)
   end
 end

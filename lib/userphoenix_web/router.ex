@@ -36,11 +36,15 @@ defmodule UserphoenixWeb.Router do
 
     post "/", PageController, :create
     get "/u/:token", TokenController, :verify
-    get "/u/:token/dashboard", DashboardController, :show
   end
 
   scope "/", UserphoenixWeb do
     pipe_through [:browser, :require_auth]
+
+    get "/user/:id/dashboard", DashboardController, :show
+    get "/user/:id/settings", SettingsController, :show
+    put "/user/:id/settings", SettingsController, :update
+    delete "/user/:id/settings", SettingsController, :delete
 
     live_session :authenticated,
       on_mount: [{UserphoenixWeb.Plugs.Auth, :require_authenticated_user}] do

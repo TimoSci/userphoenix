@@ -17,7 +17,7 @@
             {Phoenix.Flash.get(@flash, :mnemonic)}
           </p>
         </div>
-        <a href={~p"/u/#{@token}/dashboard"} class="btn btn-sm btn-ghost">
+        <a href={~p"/user/#{@user}/dashboard"} class="btn btn-sm btn-ghost">
           <.icon name="hero-x-mark" class="size-5" />
         </a>
       </div>
@@ -37,10 +37,10 @@
             You can always access your account with this secret web link. Create a bookmark for convenience!
           </p>
           <p class="font-mono text-sm bg-base-300/50 rounded-box p-3 select-all">
-            {UserphoenixWeb.Endpoint.url()}/u/{@token}
+            {UserphoenixWeb.Endpoint.url()}/u/{Phoenix.Flash.get(@flash, :token)}
           </p>
         </div>
-        <a href={~p"/u/#{@token}/dashboard"} class="btn btn-sm btn-ghost">
+        <a href={~p"/user/#{@user}/dashboard"} class="btn btn-sm btn-ghost">
           <.icon name="hero-x-mark" class="size-5" />
         </a>
       </div>

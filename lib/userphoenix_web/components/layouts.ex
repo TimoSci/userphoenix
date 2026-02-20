@@ -53,7 +53,7 @@ defmodule UserphoenixWeb.Layouts do
             <.theme_toggle />
           </li>
           <li :if={@current_user}>
-            <.button navigate={~p"/users/#{@current_user}/edit"}>
+            <.button navigate={~p"/user/#{@current_user}/settings"}>
               <.icon name="hero-cog-6-tooth-mini" /> Settings
             </.button>
           </li>

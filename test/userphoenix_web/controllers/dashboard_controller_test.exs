@@ -8,15 +8,20 @@ defmodule UserphoenixWeb.DashboardControllerTest do
     %{user: user, token: token}
   end
 
-  test "GET /u/:token/dashboard renders the dashboard", %{conn: conn, user: user, token: token} do
-    conn = get(conn, ~p"/u/#{token}/dashboard")
+  test "GET /user/:id/dashboard renders the dashboard for authenticated user", %{
+    conn: conn,
+    user: user
+  } do
+    conn = conn |> log_in_user(user) |> get(~p"/user/#{user}/dashboard")
     assert html_response(conn, 200) =~ "Dashboard"
     assert html_response(conn, 200) =~ user.name
   end
 
-  test "GET /u/:token/dashboard redirects to /access with invalid token", %{conn: conn} do
-    conn = get(conn, ~p"/u/invalidtoken1234567890abcdef00/dashboard")
-    assert redirected_to(conn) == ~p"/access"
-    assert Phoenix.Flash.get(conn.assigns.flash, :error) =~ "Invalid access token"
+  test "GET /user/:id/dashboard redirects to /access when not authenticated", %{
+    conn: conn,
+    user: user
+  } do
+    conn = get(conn, ~p"/user/#{user}/dashboard")
+    assert redirected_to(conn) == "/access"
   end
 end

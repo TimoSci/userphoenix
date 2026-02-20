@@ -9,8 +9,9 @@ defmodule UserphoenixWeb.TokenController do
       {:ok, user} ->
         conn
         |> put_session(:user_id, user.id)
+        |> put_session(:token, raw_token)
         |> configure_session(renew: true)
-        |> redirect(to: ~p"/u/#{raw_token}/dashboard")
+        |> redirect(to: ~p"/user/#{user}/dashboard")
 
       {:error, :not_found} ->
         ip = conn.remote_ip |> :inet.ntoa() |> to_string()
