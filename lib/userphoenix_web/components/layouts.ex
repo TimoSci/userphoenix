@@ -44,7 +44,8 @@ defmodule UserphoenixWeb.Layouts do
           Account Created!
         </span>
         <span :if={@current_user} class="text-sm opacity-70">
-          Signed in as <span class="font-semibold">{@current_user.name}</span>
+          Signed in as <span class="font-semibold">{Userphoenix.Users.User.slug(@current_user)}</span>
+          - Nickname: <span class="font-semibold">{@current_user.name}</span>
         </span>
       </div>
       <div class="flex-none">

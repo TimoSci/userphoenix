@@ -12,6 +12,13 @@ defmodule Userphoenix.Users.User do
     timestamps(type: :utc_datetime)
   end
 
+  def slug(%__MODULE__{mnemonic_hash: hash}) when is_binary(hash) do
+    UniqueNamesGenerator.generate([:adjectives, :animals, :names],
+      seed: hash,
+      separator: "-"
+    )
+  end
+
   @doc false
   def changeset(user, attrs) do
     user
