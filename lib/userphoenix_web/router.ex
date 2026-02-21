@@ -45,6 +45,7 @@ defmodule UserphoenixWeb.Router do
     get "/user/:id/dashboard", DashboardController, :show
     get "/user/:id/settings", SettingsController, :show
     put "/user/:id/settings", SettingsController, :update
+    post "/user/:id/settings/token", SettingsController, :regenerate_token
     delete "/user/:id/settings", SettingsController, :delete
 
     live_session :authenticated,

@@ -7,8 +7,8 @@ defmodule UserphoenixWeb.SettingsController do
   def show(conn, _params) do
     user = conn.assigns.current_user
     changeset = Users.change_user(user)
-    token = get_session(conn, :token)
-    mnemonic = if token, do: Mnemonic.encode(token)
+    mnemonic_token = get_session(conn, :mnemonic_token)
+    mnemonic = if mnemonic_token, do: Mnemonic.encode(mnemonic_token)
     render(conn, :show, user: user, changeset: changeset, mnemonic: mnemonic)
   end
 
@@ -22,9 +22,25 @@ defmodule UserphoenixWeb.SettingsController do
         |> redirect(to: ~p"/user/#{user}/settings")
 
       {:error, changeset} ->
-        token = get_session(conn, :token)
-        mnemonic = if token, do: Mnemonic.encode(token)
+        mnemonic_token = get_session(conn, :mnemonic_token)
+        mnemonic = if mnemonic_token, do: Mnemonic.encode(mnemonic_token)
         render(conn, :show, user: user, changeset: changeset, mnemonic: mnemonic)
+    end
+  end
+
+  def regenerate_token(conn, _params) do
+    user = conn.assigns.current_user
+
+    case Users.regenerate_login_token(user) do
+      {:ok, updated_user} ->
+        conn
+        |> put_flash(:new_login_token, updated_user.raw_login_token)
+        |> redirect(to: ~p"/user/#{user}/settings")
+
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:error, "Could not regenerate login token.")
+        |> redirect(to: ~p"/user/#{user}/settings")
     end
   end
 

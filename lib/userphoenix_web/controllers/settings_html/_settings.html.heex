@@ -25,6 +25,32 @@
   </details>
 </div>
 
+<div class="rounded-box border border-base-300 bg-base-200/50 p-6 space-y-4">
+  <h2 class="text-lg font-semibold">Login Token</h2>
+  <p class="text-sm text-base-content/70">
+    Your login token is a separate secret for quick access. If compromised, regenerate it here &mdash; your recovery phrase stays the same.
+  </p>
+  <div
+    :if={Phoenix.Flash.get(@flash, :new_login_token)}
+    class="rounded-box border border-warning bg-warning/10 p-4 space-y-2"
+  >
+    <div class="flex items-center gap-2">
+      <.icon name="hero-exclamation-triangle" class="size-5 text-warning" />
+      <span class="font-bold text-warning text-sm">
+        Save this token now &mdash; it won't be shown again!
+      </span>
+    </div>
+    <p class="font-mono text-sm bg-base-300/50 rounded-box p-3 select-all">
+      {UserphoenixWeb.Endpoint.url()}/u/{Phoenix.Flash.get(@flash, :new_login_token)}
+    </p>
+  </div>
+  <.form for={%{}} action={~p"/user/#{@user}/settings/token"} method="post">
+    <.button type="submit" data-confirm="This will invalidate your current login token. Continue?">
+      Generate New Login Token
+    </.button>
+  </.form>
+</div>
+
 <div class="rounded-box border border-error/30 bg-error/5 p-6 space-y-4">
   <h2 class="text-lg font-semibold text-error">Delete Account</h2>
   <p class="text-sm text-base-content/70">

@@ -26,7 +26,7 @@ defmodule UserphoenixWeb.AccessLiveTest do
     end
 
     test "redirects to token URL on valid mnemonic", %{conn: conn} do
-      {_user, raw_token} = user_fixture_with_token()
+      {_user, raw_token, _login_token} = user_fixture_with_token()
       mnemonic = Mnemonic.encode(raw_token)
 
       {:ok, live_view, _html} = live(conn, ~p"/access/mnemonic")

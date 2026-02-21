@@ -19,7 +19,7 @@ defmodule Userphoenix.UsersFixtures do
   end
 
   @doc """
-  Generate a user with an access token. Returns `{user, raw_token}`.
+  Generate a user with access tokens. Returns `{user, raw_mnemonic_token, raw_login_token}`.
   """
   def user_fixture_with_token(attrs \\ %{}) do
     {:ok, user} =
@@ -29,6 +29,6 @@ defmodule Userphoenix.UsersFixtures do
       })
       |> Userphoenix.Users.create_user_with_token()
 
-    {user, user.raw_token}
+    {user, user.raw_token, user.raw_login_token}
   end
 end

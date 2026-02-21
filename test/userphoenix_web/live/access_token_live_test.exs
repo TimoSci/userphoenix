@@ -13,7 +13,7 @@ defmodule UserphoenixWeb.AccessTokenLiveTest do
     end
 
     test "redirects to /u/:token on valid hex token", %{conn: conn} do
-      {_user, raw_token} = user_fixture_with_token()
+      {_user, _raw_mnemonic_token, raw_token} = user_fixture_with_token()
 
       {:ok, live_view, _html} = live(conn, ~p"/access/token")
 

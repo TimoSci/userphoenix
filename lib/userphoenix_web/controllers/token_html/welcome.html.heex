@@ -16,13 +16,13 @@
     <div class="rounded-box border border-accent bg-accent/10 p-6">
       <div class="flex items-center gap-2 mb-2">
         <.icon name="hero-light-bulb" class="size-5 text-accent" />
-        <h2 class="font-bold text-accent">Tip:</h2>
+        <h2 class="font-bold text-accent">Login Token</h2>
       </div>
       <p class="text-sm mb-3">
-        You can always access your account with this secret web link. Create a bookmark for convenience!
+        Use this separate login link for quick access. You can regenerate it from settings if compromised.
       </p>
       <p class="font-mono text-sm bg-base-300/50 rounded-box p-3 select-all">
-        {UserphoenixWeb.Endpoint.url()}/u/{@token}
+        {UserphoenixWeb.Endpoint.url()}/u/{Phoenix.Flash.get(@flash, :login_token)}
       </p>
     </div>
 

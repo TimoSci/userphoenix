@@ -28,16 +28,24 @@ defmodule Userphoenix.Users do
   def get_user(id), do: Repo.get(User, id)
 
   @doc """
-  Gets a user by raw token. Hashes the token and queries by token_hash.
+  Gets a user by raw token. Hashes the token and queries by token_hash or mnemonic_hash.
 
-  Returns `{:ok, user}` or `{:error, :not_found}`.
+  Returns `{:ok, user, :token | :mnemonic}` or `{:error, :not_found}`.
   """
   def get_user_by_token(raw_token) do
     hash = :crypto.hash(:sha256, raw_token) |> Base.encode16(case: :lower)
 
-    case Repo.get_by(User, token_hash: hash) do
-      nil -> {:error, :not_found}
-      user -> {:ok, user}
+    query =
+      from u in User,
+        where: u.token_hash == ^hash or u.mnemonic_hash == ^hash
+
+    case Repo.one(query) do
+      nil ->
+        {:error, :not_found}
+
+      user ->
+        match_type = if user.token_hash == hash, do: :token, else: :mnemonic
+        {:ok, user, match_type}
     end
   end
 
@@ -73,6 +81,17 @@ defmodule Userphoenix.Users do
   """
   def delete_user(%User{} = user) do
     Repo.delete(user)
+  end
+
+  @doc """
+  Regenerates the login token for a user.
+
+  Returns `{:ok, user}` with `raw_login_token` populated.
+  """
+  def regenerate_login_token(%User{} = user) do
+    user
+    |> User.login_token_changeset()
+    |> Repo.update()
   end
 
   @doc """

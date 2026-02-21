@@ -4,8 +4,8 @@ defmodule UserphoenixWeb.DashboardControllerTest do
   import Userphoenix.UsersFixtures
 
   setup do
-    {user, token} = user_fixture_with_token()
-    %{user: user, token: token}
+    {user, _mnemonic_token, _login_token} = user_fixture_with_token()
+    %{user: user}
   end
 
   test "GET /user/:id/dashboard renders the dashboard for authenticated user", %{

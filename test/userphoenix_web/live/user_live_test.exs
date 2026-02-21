@@ -8,7 +8,7 @@ defmodule UserphoenixWeb.UserLiveTest do
   @invalid_attrs %{name: nil}
 
   defp create_user(_) do
-    {user, _token} = user_fixture_with_token()
+    {user, _token, _login_token} = user_fixture_with_token()
     %{user: user}
   end
 
